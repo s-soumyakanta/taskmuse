@@ -1,12 +1,13 @@
-
 import './App.css';
+import Nav from './components/Nav';
 
-function App() {
+
+
+
+const App = () => {
   return (
    <>
-   <div>
-    TaskMuse
-   </div>
+      <Nav />
    </>
   );
 }
