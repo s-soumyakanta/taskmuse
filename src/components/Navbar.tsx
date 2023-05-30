@@ -1,4 +1,3 @@
-import {useState} from "react"
 import menu from "../assets/hambuger.svg"
 import search from "../assets/search.svg"
 import view from "../assets/grid.svg"
@@ -8,17 +7,13 @@ import download from "../assets/download.svg"
 import logo from "../assets/logo.png"
 
 const Navbar = () => {
-  const [isToggle,setIsToggle] = useState(false)
   
-  const handleMenuClick = () => {
-        setIsToggle(!isToggle)
-  }
   return (
     <>
      <nav className="flex flex-row w-full  border-b-2 ">
        <div className="flex flex-row w-2/6   ml-8 items-center  ">
-        <div className="w-10">
-          <img src={menu} alt="menu"  />
+        <div className="w-10" >
+          <img src={menu} alt="menu" />
         </div>
         <div className="w-16 ml-6 flex items-center">
           <img src={logo} alt="taskzen" />
