@@ -1,7 +1,13 @@
+import {useState} from "react"
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 
 const App = () => {
+  const [toggle,setToggle] = useState(false)
+  const toggleMenu = () =>{
+    setToggle(!toggle)
+  }
+  console.log(toggle)
   return (
    <>
       {/* <Nav /> */}
@@ -9,14 +15,14 @@ const App = () => {
       {/* <Sidebar /> */}
       <div className='h-[100vh]'>
         <div className=' h-[9%]'>
-          <Navbar />
+          <Navbar handleMenuClick={toggleMenu} />
         </div>
         <div className=' h-[91%]'>
-        <div className='flex h-full bg-slate-500'>
+        <div className='flex h-full'>
           <div>
-            <Sidebar />
+            <Sidebar shouldToggle={toggle} />
           </div>
-          <div className='to-blue-900'>
+          <div>
             right
           </div>
           </div>

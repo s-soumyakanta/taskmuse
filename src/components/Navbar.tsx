@@ -5,15 +5,17 @@ import sort from "../assets/filter.svg"
 import about from "../assets/info.svg"
 import download from "../assets/download.svg"
 import logo from "../assets/logo.png"
+import { Toggle } from "./types/toggle.types"
 
-const Navbar = () => {
-  
+
+const Navbar = (props:Toggle) => {
+ 
   return (
     <>
      <nav className="flex flex-row w-full  border-b-2 ">
        <div className="flex flex-row w-2/6   ml-8 items-center  ">
-        <div className="w-10" >
-          <img src={menu} alt="menu" />
+        <div className="w-10 cursor-pointer" >
+          <img src={menu} alt="menu" onClick={props.handleMenuClick} />
         </div>
         <div className="w-16 ml-6 flex items-center">
           <img src={logo} alt="taskzen" />
