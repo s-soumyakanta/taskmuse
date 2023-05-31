@@ -1,5 +1,6 @@
 import { screen, render } from "@testing-library/react";
 import Navbar from "../Navbar";
+import user from "@testing-library/user-event"
 
 describe("Navbar rendering svg icons correctly", () => {
   test("SVG icons rendering correctly", () => {
@@ -12,6 +13,16 @@ describe("Navbar rendering svg icons correctly", () => {
       expect(icon).toBeInTheDocument();
     });
   });
+
+  test("Navbar Menu clicked",async ()=>{
+    user.setup()
+    const handleMenu = jest.fn()
+    
+    render(<Navbar handleMenuClick={handleMenu} />)
+    const menu = screen.getByAltText("menu")
+    await user.click(menu)
+    expect(handleMenu).toHaveBeenCalledTimes(1) 
+})
 });
 
 
