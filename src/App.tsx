@@ -1,7 +1,7 @@
 import {useState} from "react"
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import ShowTask from "./components/ShowTask";
+import SubHomePage from "./components/SubHomePage";
 
 const App = () => {
   const [toggle,setToggle] = useState(true)
@@ -24,7 +24,7 @@ const App = () => {
             <Sidebar shouldToggle={toggle} />
           </div>
           <div className="bg-teal-200 w-full flex justify-center">
-            <ShowTask />
+            <SubHomePage />
           </div>
           </div>
         </div>
