@@ -5,27 +5,31 @@ import sort from "../assets/filter.svg"
 import about from "../assets/info.svg"
 import download from "../assets/download.svg"
 import logo from "../assets/logo.png"
+import { Toggle } from "./types/toggle.types"
 
-const Nav = () => {
+
+const Navbar = (props:Toggle) => {
+ 
   return (
     <>
-     <nav className="flex flex-row w-full mt-2 border-b-2 ">
-       <div className="flex flex-row w-1/6 justify-between px-8 items-center">
-        <div className="w-8">
-          <img src={menu} alt="menu" />
+     <nav className="flex flex-row w-full  border-b-2 ">
+       <div className="flex flex-row w-2/6   ml-8 items-center  ">
+        <div className="w-10 cursor-pointer" >
+          <img src={menu} alt="menu" onClick={props.handleMenuClick} />
         </div>
-        <div className="w-16">
+        <div className="w-16 ml-6 flex items-center">
           <img src={logo} alt="taskzen" />
+          <p>TaskZen</p>
         </div>
        </div>
 
-       <div className="flex  w-5/6 justify-between items-center px-8 ">
-        <div className="w-4/6">
+       <div className="flex  w-4/6 justify-between items-center px-8 ">
+        <div className="w-3/6">
         <div className=" flex justify-end ">
           <img src={search} alt="search" className="w-6" />
         </div>
         </div>
-        <div className="w-2/6 flex justify-evenly items-center">
+        <div className="w-3/6 flex justify-evenly items-center">
 
       
         <div className="w-6">
@@ -48,4 +52,4 @@ const Nav = () => {
   )
 }
 
-export default Nav
+export default Navbar
