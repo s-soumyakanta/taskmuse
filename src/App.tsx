@@ -1,9 +1,10 @@
 import {useState} from "react"
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
+import ShowTask from "./components/ShowTask";
 
 const App = () => {
-  const [toggle,setToggle] = useState(false)
+  const [toggle,setToggle] = useState(true)
   const toggleMenu = () =>{
     setToggle(!toggle)
   }
@@ -22,8 +23,8 @@ const App = () => {
           <div>
             <Sidebar shouldToggle={toggle} />
           </div>
-          <div>
-            right
+          <div className="bg-teal-200 w-full flex justify-center">
+            <ShowTask />
           </div>
           </div>
         </div>
