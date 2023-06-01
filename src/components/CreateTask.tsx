@@ -18,6 +18,7 @@ if(createTaskTextArea === null){
 
     createTaskTextArea.addEventListener("keyup", (e) => {
         if (createTaskTextArea && e.target) {
+            createTaskTextArea.style.height = "50px"
             let textAreaHeight = (e.target as HTMLTextAreaElement).scrollHeight;
             createTaskTextArea.style.height = `${textAreaHeight}px`;
         }
