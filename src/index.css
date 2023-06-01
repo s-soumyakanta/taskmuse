@@ -5,3 +5,7 @@
 #create-task::-webkit-scrollbar{
     width: 0px;
 }
+
+.hide-scroll-bar::-webkit-scrollbar {
+    display: none;
+  }
