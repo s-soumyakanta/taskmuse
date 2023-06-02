@@ -1,5 +1,5 @@
 import CreateTask from "./CreateTask"
-
+import ShowTasks from "./ShowTasks"
 
 const SubHomePage = () => {
   return (
@@ -8,7 +8,9 @@ const SubHomePage = () => {
         <div className=" bg-yellow-100 w-full flex justify-center items-center">
            <CreateTask />
         </div>
-        <div className="bg-lime-300 h-full w-full">Task List</div>
+        <div className="hide-scroll-bar bg-lime-300 h-full w-full overflow-y-scroll p-4">
+          <ShowTasks />
+        </div>
         
       </div>
     </>

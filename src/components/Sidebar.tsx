@@ -15,7 +15,7 @@ const Sidebar = (props:ToggleValue) => {
     <>
       <div className={props.shouldToggle ?  sidebarOpenWidth : sidebarCloseWidth}>
         <div className={props.shouldToggle ? wideView : boxView}>
-            <img src={task} alt="task" className="w-10" />
+            <img src={task}  alt="task" className="w-10" />
             {
               props.shouldToggle ? <p className="pl-6 font-medium">Task</p>:null
             }
