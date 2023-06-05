@@ -74,7 +74,7 @@ const handelSave = () => {
   return (
     <>
     <div className='w-[40%] my-7  bg-red-400 p-2 rounded-md'>
-      <div className=" flex justify-center w-full items-centern">
+      <div className=" flex justify-center w-full items-center">
        <textarea id="create-task" 
                  placeholder="Create a task..." 
                  className="pl-4 w-full rounded-md resize-none " 

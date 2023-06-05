@@ -19,10 +19,10 @@ const Task = () => {
     tasks.map((task)=>{
       return(
 
-   <div className="max-h-64 w-1/4 bg-red-600 rounded-md p-1 m-2" onClick={handleClick}>
-        <div className=" overflow-y-hidden">
+   <div className="h-32 w-1/4 rounded-md p-1 m-2" onClick={handleClick}>
+        <textarea className="w-full h-full resize-none overflow-y-hidden">
           {task.taskText}
-        </div>
+        </textarea>
    </div>
       )
 
