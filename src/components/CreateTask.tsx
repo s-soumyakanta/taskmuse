@@ -6,7 +6,8 @@ import reminder from "../assets/alert.svg"
 import more from "../assets/more.svg"
 import copy from "../assets/copy.svg"
 import { ChangeEvent, useState } from "react"
-
+import { useAppDispatch} from "../hooks"
+import { addText } from "../store/Slices/tasksSlice"
 
 
 export const EditTaskOptions = () =>{
@@ -39,10 +40,9 @@ export const EditTaskOptions = () =>{
 }
 const CreateTask = () => {
   const [taskText,setTaskTest] = useState("")
-  const [text,setText] = useState("")
-
-    //Auto resize text area for create a task
-   
+  const dispatch = useAppDispatch()
+  
+//Auto resize text area for create a task
  const createTaskTextArea = document.getElementById("create-task") as HTMLTextAreaElement | null;
 if(createTaskTextArea === null){
    console.log("Can't found")
@@ -60,16 +60,17 @@ if(createTaskTextArea === null){
 
 const handleOnChange = (e:ChangeEvent<HTMLTextAreaElement>) =>{
     setTaskTest(e.target.value)
-
+    
 }
 const save = (userText:string) => {
-    setText(userText)
+    dispatch(addText({taskText:userText}))
+
 }
 const handelSave = () => {
     save(taskText)
     setTaskTest("")
 }
-console.log(text)
+
   return (
     <>
     <div className='w-[40%] my-7  bg-red-400 p-2 rounded-md'>
