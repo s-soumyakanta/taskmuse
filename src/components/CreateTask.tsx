@@ -5,7 +5,9 @@ import repeat from "../assets/repeat.svg"
 import reminder from "../assets/alert.svg"
 import more from "../assets/more.svg"
 import copy from "../assets/copy.svg"
-
+import { ChangeEvent, useState } from "react"
+import { useAppDispatch} from "../hooks"
+import { addText } from "../store/Slices/tasksSlice"
 
 
 export const EditTaskOptions = () =>{
@@ -37,12 +39,13 @@ export const EditTaskOptions = () =>{
     )
 }
 const CreateTask = () => {
-
-    //Auto resize text area for create a task
-   
-    const createTaskTextArea = document.getElementById("create-task") as HTMLTextAreaElement | null;
+  const [taskText,setTaskTest] = useState("")
+  const dispatch = useAppDispatch()
+  
+//Auto resize text area for create a task
+ const createTaskTextArea = document.getElementById("create-task") as HTMLTextAreaElement | null;
 if(createTaskTextArea === null){
-
+   console.log("Can't found")
 }else{
 
     createTaskTextArea.addEventListener("keyup", (e) => {
@@ -55,12 +58,34 @@ if(createTaskTextArea === null){
 }
 
 
+const handleOnChange = (e:ChangeEvent<HTMLTextAreaElement>) =>{
+    setTaskTest(e.target.value)
+    
+}
+const save = (userText:string) => {
+    if(!userText){
+        alert("Please Compose a Task")
+    }else{
+
+        dispatch(addText({taskText:userText}))
+    }
+
+}
+const handelSave = () => {
+    save(taskText)
+    setTaskTest("")
+}
 
   return (
     <>
     <div className='w-[40%] my-7  bg-red-400 p-2 rounded-md'>
-      <div className=" flex justify-center w-full items-centern">
-       <textarea id="create-task" placeholder="Create a task..." className="pl-4 w-full rounded-md resize-none " />
+      <div className=" flex justify-center w-full items-center">
+       <textarea id="create-task" 
+                 placeholder="Create a task..." 
+                 className="pl-4 w-full rounded-md resize-none " 
+                 onChange={handleOnChange}
+                 value={taskText}
+        />
       </div>
       <div className="flex  w-full justify-between items-center pt-2 ">
       <div className="flex  w-[60%] justify-between  ">
@@ -68,7 +93,7 @@ if(createTaskTextArea === null){
       </div>
       <div className="w-[40%] flex justify-evenly px-1">
         <button>Discard</button>
-        <button>Save</button>
+        <button onClick={handelSave}>Save</button>
       </div>
       </div>
     </div>

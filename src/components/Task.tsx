@@ -1,60 +1,55 @@
 import { useState } from "react"
-import vertical from "../assets/testImg-vertical.jpg"
-import horizontal from "../assets/testImg-horizontal.jpg"
 import TaskModal from "./TaskModal"
 import { createPortal } from "react-dom"
+import { TasksStateType } from "./types/task.types"
 
-
-const Task = () => {
+const Task = ({allTasks}:TasksStateType) => {
   const [shoWTask,setShowTask] = useState(false)
-  const handleClick = () =>{
+  const [taskId,setTaskId] = useState<number | null>(null)
+  
+  const handleClick =  (id:number) =>{
+     setTaskId(id)
+     setShowTask(true)
+   }
+  
+  const toggleModal = () => {
     setShowTask(!shoWTask)
   }
+ 
+ 
+ 
   return (
     <>
+    {
+      allTasks?.length === 0 ? "No task found":
    <div className="flex flex-wrap justify-center items-center">
   
-  
-   <div className="h-72 w-1/4 bg-red-600 rounded-md p-1 m-2" onClick={handleClick}>
-        <div className="h-[50%] flex justify-center text-center">
-          <img src={vertical} alt="vertical" className="h-[98%]" />
-        </div>
-     
-        <div className="h-[50%] overflow-y-hidden">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam quia sint placeat non quidem voluptate culpa sapiente tempora beatae, deserunt assumenda laudantium. Eum cumque quibusdam ratione voluptates maxime animi tenetur amet maiores similique?</div>
+  {
+    allTasks?.map((task)=>{
+      const textAreaValue = `${task.taskText}`
+      return(
+
+   <div className="h-32 w-1/4 rounded-md p-1 m-2" key={task.id} onClick={() =>handleClick(task.id)}>
+        <textarea className="w-full h-full resize-none overflow-y-hidden"
+          value={textAreaValue}
+          readOnly
+        />
         
-    </div>
+   </div>
+      )
+
+    })
+  }
     
-   <div className="h-72 w-1/4 bg-red-600 rounded-md p-1 m-2">
-        <div className="h-[50%] flex justify-center text-center">
-          <img src={horizontal} alt="vertical" className="h-[98%]" />
-        </div>
-        <div className="h-[50%] overflow-y-hidden">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam quia sint placeat non quidem voluptate culpa sapiente tempora beatae, deserunt assumenda laudantium. Eum cumque quibusdam ratione voluptates maxime animi tenetur amet maiores similique?</div>
-    </div>
-   <div className="h-72 w-1/4 bg-red-600 rounded-md p-1 m-2">
-        <div className="h-[50%] flex justify-center text-center">
-          <img src={vertical} alt="vertical" className="h-[98%]" />
-        </div>
-        <div className="h-[50%] overflow-y-hidden">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam quia sint placeat non quidem voluptate culpa sapiente tempora beatae, deserunt assumenda laudantium. Eum cumque quibusdam ratione voluptates maxime animi tenetur amet maiores similique?</div>
-    </div>
-   <div className="h-72 w-1/4 bg-red-600 rounded-md p-1 m-2">
-        <div className="h-[50%] flex justify-center text-center">
-          <img src={vertical} alt="vertical" className="h-[98%]" />
-        </div>
-        <div className="h-[50%] overflow-y-hidden">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam quia sint placeat non quidem voluptate culpa sapiente tempora beatae, deserunt assumenda laudantium. Eum cumque quibusdam ratione voluptates maxime animi tenetur amet maiores similique?</div>
-    </div>
-   <div className="h-72 w-1/4 bg-red-600 rounded-md p-1 m-2">
-        <div className="h-[50%] flex justify-center text-center">
-          <img src={vertical} alt="vertical" className="h-[98%]" />
-        </div>
-        <div className="h-[50%] overflow-y-hidden">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam quia sint placeat non quidem voluptate culpa sapiente tempora beatae, deserunt assumenda laudantium. Eum cumque quibusdam ratione voluptates maxime animi tenetur amet maiores similique?</div>
-    </div>
+  
    
    
     
    </div>
+    }
    {
       shoWTask && createPortal(
-        <TaskModal handleMenuClick={handleClick}  />,
+        <TaskModal selectedTaskId={taskId} toggleModal={toggleModal} tasks={allTasks} />,
         document.body
 
       )
