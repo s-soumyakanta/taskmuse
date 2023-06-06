@@ -1,28 +1,40 @@
 import { useState } from "react"
 import TaskModal from "./TaskModal"
 import { createPortal } from "react-dom"
-import { useAppSelector } from "../hooks"
+import { TasksStateType } from "./types/task.types"
 
-const Task = () => {
+const Task = ({allTasks}:TasksStateType) => {
   const [shoWTask,setShowTask] = useState(false)
-  const handleClick = () =>{
+  const [taskId,setTaskId] = useState<number | null>(null)
+  
+  const handleClick =  (id:number) =>{
+     setTaskId(id)
+     setShowTask(true)
+   }
+  
+  const toggleModal = () => {
     setShowTask(!shoWTask)
   }
-  const tasks = useAppSelector(state => state.task.allTasks)
+ 
+ 
+ 
   return (
     <>
     {
-      tasks.length === 0 ? "No task found":
+      allTasks?.length === 0 ? "No task found":
    <div className="flex flex-wrap justify-center items-center">
   
   {
-    tasks.map((task)=>{
+    allTasks?.map((task)=>{
+      const textAreaValue = `${task.taskText}`
       return(
 
-   <div className="h-32 w-1/4 rounded-md p-1 m-2" onClick={handleClick}>
-        <textarea className="w-full h-full resize-none overflow-y-hidden">
-          {task.taskText}
-        </textarea>
+   <div className="h-32 w-1/4 rounded-md p-1 m-2" key={task.id} onClick={() =>handleClick(task.id)}>
+        <textarea className="w-full h-full resize-none overflow-y-hidden"
+          value={textAreaValue}
+          readOnly
+        />
+        
    </div>
       )
 
@@ -37,7 +49,7 @@ const Task = () => {
     }
    {
       shoWTask && createPortal(
-        <TaskModal handleMenuClick={handleClick}  />,
+        <TaskModal selectedTaskId={taskId} toggleModal={toggleModal} tasks={allTasks} />,
         document.body
 
       )

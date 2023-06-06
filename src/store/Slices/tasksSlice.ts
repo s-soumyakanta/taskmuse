@@ -1,14 +1,8 @@
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";
+import { TasksStateType } from "../../components/types/task.types";
 
-export interface Task{
-    taskText:string 
-}
 
-export interface TasksState{
-    allTasks:Task[]
-}
-
-const initialState:TasksState={
+const initialState:TasksStateType={
    allTasks:[]
 }
 
@@ -18,6 +12,7 @@ const TasksSlice = createSlice({
     reducers:{
         addText:(state,action:PayloadAction<{taskText:string}>)=>{
             state.allTasks.push({
+                id:state.allTasks.length + 1,
                 taskText:action.payload.taskText
             })
         }

@@ -63,7 +63,12 @@ const handleOnChange = (e:ChangeEvent<HTMLTextAreaElement>) =>{
     
 }
 const save = (userText:string) => {
-    dispatch(addText({taskText:userText}))
+    if(!userText){
+        alert("Please Compose a Task")
+    }else{
+
+        dispatch(addText({taskText:userText}))
+    }
 
 }
 const handelSave = () => {

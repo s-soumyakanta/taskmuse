@@ -1,5 +1,6 @@
 export type Toggle = {
-    handleMenuClick?: ()=> void;
+    handleMenuClick?: ()=> void,
+    
 }
 
 export type ToggleValue = {
