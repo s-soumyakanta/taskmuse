@@ -10,10 +10,11 @@ const TasksSlice = createSlice({
     name:"tasks",
     initialState,
     reducers:{
-        addText:(state,action:PayloadAction<{taskText:string}>)=>{
+        addText:(state,action:PayloadAction<{taskText:string,imageArray?:string[]}>)=>{
             state.allTasks.push({
-                id:state.allTasks.length + 1,
-                taskText:action.payload.taskText
+                id:crypto.randomUUID(),
+                taskText:action.payload.taskText,
+                images:action.payload.imageArray
             })
         }
     }

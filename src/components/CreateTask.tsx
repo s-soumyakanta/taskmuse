@@ -11,10 +11,34 @@ import { addText } from "../store/Slices/tasksSlice"
 
 
 export const EditTaskOptions = () =>{
+    const addImageSvg = document.getElementById("add-image-svg")
+    const addImageInput = document.getElementById("add-image-input")
+    
+    addImageSvg?.addEventListener("click",()=>{
+        addImageInput?.click()
+    })
+    
+    addImageInput?.addEventListener("change",(e:Event)=>{
+       const files = (e.target as HTMLInputElement).files
+       if(files){
+
+           const selectedImagesFileArray = Array.from(files)
+           const imagesArray = selectedImagesFileArray.map((image) => {
+                 return URL.createObjectURL(image)
+
+           })
+           console.log(imagesArray)
+       }
+       
+    })
+   
+    
+
     return(
         <>
           <div className="w-6">
-            <img src={image} alt="Add Photographs to task" />
+            <img src={image} alt="Add Photographs to task" id="add-image-svg" />
+            <input type="file" accept="image/jpeg, image/png, image/jpg" className="hidden" id="add-image-input" multiple  />
         </div>
         <div className="w-6">
             <img src={color} alt="Add background color to task" />

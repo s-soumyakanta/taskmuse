@@ -5,9 +5,9 @@ import { TasksStateType } from "./types/task.types"
 
 const Task = ({allTasks}:TasksStateType) => {
   const [shoWTask,setShowTask] = useState(false)
-  const [taskId,setTaskId] = useState<number | null>(null)
+  const [taskId,setTaskId] = useState<string>("")
   
-  const handleClick =  (id:number) =>{
+  const handleClick =  (id:string) =>{
      setTaskId(id)
      setShowTask(true)
    }
