@@ -1,4 +1,3 @@
-import {EditTaskOptions} from "../components/CreateTask"
 import close from "../assets/close-cross.svg"
 import { ModalComponentProps } from "./types/modal.types"
 
@@ -11,6 +10,19 @@ const TaskModal = ({selectedTaskId,tasks,toggleModal}:ModalComponentProps) => {
 
         <div className='w-[40%] h-[80%] bg-yellow-100 rounded-md relative' onClick={(e)=>e.stopPropagation()}>
             <div className="h-[85%] pt-8 overflow-x-scroll hide-scroll-bar p-2 bg-lime-400 rounded-t-md">
+              {
+                !selectedTask ? null: 
+                <div className="flex">
+                  {
+                    selectedTask.images?.map((img)=>{
+                      return(
+
+                        <img src={img} alt="selected " className="m-1" />
+                      )
+                    })
+                  }
+                </div>
+              }
               <p contentEditable="true" className="outline-none">
                 {
                   selectedTask?.taskText
@@ -19,7 +31,7 @@ const TaskModal = ({selectedTaskId,tasks,toggleModal}:ModalComponentProps) => {
             </div>
             <div className="h-[15%] rounded-b-md flex flex-col ">  
               <div className=" h-[50%] flex items-center justify-between px-3">
-               <EditTaskOptions />
+                  <p>To be updated</p>
               </div>
               <div className="flex items-end h-[50%] justify-end space-x-4 pb-1 pr-1">
                 <button className="p-2 w-24 rounded-md bg-lime-200">Delete</button>
