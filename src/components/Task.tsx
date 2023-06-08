@@ -29,7 +29,19 @@ const Task = ({allTasks}:TasksStateType) => {
       const textAreaValue = `${task.taskText}`
       return(
 
-   <div className="h-32 w-1/4 rounded-md p-1 m-2" key={task.id} onClick={() =>handleClick(task.id)}>
+   <div className=" w-1/4 rounded-md p-1 m-2" key={task.id} onClick={() =>handleClick(task.id)}>
+       {
+        !task.images  ? null:
+        <div className="flex overflow-x-scroll bg-white justify-center items-center h-12">
+          {
+            task.images?.map((img)=>{
+              return(
+                <img src={img} className="w-auto m-1" alt="selcted" />
+              )
+            })
+          }
+        </div> 
+       }
         <textarea className="w-full h-full resize-none overflow-y-hidden"
           value={textAreaValue}
           readOnly
