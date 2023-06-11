@@ -3,6 +3,7 @@ import color from "../assets/color.svg"
 import schedule from "../assets/schedule.svg"
 import repeat from "../assets/repeat.svg"
 import reminder from "../assets/alert.svg"
+import trash from "../assets/delete.svg"
 import more from "../assets/more.svg"
 import copy from "../assets/copy.svg"
 import { ChangeEvent, useState } from "react"
@@ -10,12 +11,11 @@ import { useAppDispatch} from "../hooks"
 import { addText } from "../store/Slices/tasksSlice"
 
 
-
 const CreateTask = () => {
   const [taskText,setTaskTest] = useState("")
   const [allImage,setAllImage] = useState<string[]>([])
   const dispatch = useAppDispatch()
-  console.log(allImage)
+
 
 //Auto resize text area for create a task
  const createTaskTextArea = document.getElementById("create-task") as HTMLTextAreaElement | null;
@@ -70,6 +70,13 @@ const handleFileInput = (event: ChangeEvent<HTMLInputElement>) =>{
     
 }
 
+const handleDeleteImage = (index:number) =>{
+     const updatedAllImage = allImage.filter((elem,ind) =>{
+        return ind !== index
+     } )
+     setAllImage(updatedAllImage)
+}
+
   return (
     <>
     <div className='w-[80%] my-7  bg-red-400 p-2 rounded-md'>
@@ -77,9 +84,12 @@ const handleFileInput = (event: ChangeEvent<HTMLInputElement>) =>{
         { !allImage ? null:
             <div className="flex overflow-x-scroll">
                {
-                   allImage?.map((image)=>{
+                   allImage?.map((image,index)=>{
                        return(
-                           <img src={image} className="w-20 m-1" alt="user selected" />
+                        <div className="relative" onClick={() =>  handleDeleteImage(index)} >
+                            <img src={image} onClick={(e) => e.stopPropagation()} className="w-20 m-1 relative" alt="user selected" />
+                            <img src={trash} onClick={()=> console.log("image deleted")} className="w-6 h-6 absolute top-0 right-0 bg-red-500 p-1 rounded-full cursor-pointer" alt="delete selected" />
+                        </div>
                        )
                    })
 
